@@ -15,4 +15,9 @@ Route::group(['middleware' => ['auth', 'role:user'], 'prefix' => 'user', 'as' =>
     Route::get('/dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+require __DIR__ . '/auth.php';
