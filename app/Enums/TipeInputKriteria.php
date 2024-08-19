@@ -8,6 +8,6 @@ enum TipeInputKriteria: string
 {
     use EnumToArray;
 
-    case RENTANG_NILAI = 'Rentang Nilai';
+    case NILAI = 'Input Nilai';
     case PILIHAN = 'Pilihan';
 }

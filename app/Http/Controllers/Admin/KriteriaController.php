@@ -38,9 +38,9 @@ class KriteriaController extends Controller
     {
         $request->validated();
 
-        Kriteria::create($request->only('nama', 'bobot', 'jenis', 'tipe_input'));
+        $kriterium = Kriteria::create($request->only('nama', 'bobot', 'jenis', 'tipe_input'));
 
-        return redirect()->route('admin.kriteria.index')->with('success', 'Berhasil menambah data kriteria');
+        return redirect()->route('admin.kriteria.show', $kriterium)->with('success', 'Berhasil menambah data kriteria');
     }
 
     /**

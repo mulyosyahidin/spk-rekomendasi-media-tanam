@@ -32,7 +32,7 @@
                     <span class="hide-menu">DATA</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ activeClass('admin.kriteria.*') }}" href="{{ route('admin.kriteria.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ activeClass(['admin.kriteria.*', 'admin.sub-kriteria.*']) }}" href="{{ route('admin.kriteria.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
                         <span class="hide-menu">Kriteria</span>
                     </a>

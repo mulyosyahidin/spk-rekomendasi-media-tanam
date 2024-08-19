@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('nama');
             $table->double('bobot', 5, 2)->default(0);
             $table->enum('jenis', ['benefit', 'cost']);
-            $table->enum('tipe_input', \App\Enums\TipeInputKriteria::names());
+            $table->enum('tipe_input', \App\Enums\TipeInputKriteria::values());
         });
     }
 

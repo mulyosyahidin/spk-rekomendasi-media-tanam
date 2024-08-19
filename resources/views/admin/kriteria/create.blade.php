@@ -128,15 +128,15 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <select name="tipe_input" id="tipe-input"
-                                    class="form-control @error('jenis_data') is-invalid @enderror">
+                                    class="form-control @error('tipe_input') is-invalid @enderror">
                                 <option selected disabled>Pilih Tipe</option>
-                                @foreach($tipeInput as $key => $value)
-                                    <option value="{{ $key }}" {{ old('tipe_input') ==  $key ? 'selected' : '' }}>{{ $value }}</option>
+                                @foreach($tipeInput as $item)
+                                    <option value="{{ $item }}" {{ old('tipe_input') ==  $item ? 'selected' : '' }}>{{ $item }}</option>
                                 @endforeach
                             </select>
                             <!--end::Input-->
 
-                            @error('jenis_data')
+                            @error('tipe_input')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

@@ -85,6 +85,65 @@
                         </div>
                         <!--end::Card footer-->
                     </div>
+
+                    <div class="card w-100 position-relative overflow-hidden">
+                        <div class="px-4 py-3 border-bottom d-flex justify-content-between">
+                            <h4 class="card-title mb-0">Sub Kriteria</h4>
+
+                            <a href="{{ route('admin.sub-kriteria.show', $kriterium) }}" class="btn btn-sm btn-primary">
+                                <i class="ti ti-edit-circle"></i> Edit
+                            </a>
+                        </div>
+
+                        <!--begin::Card body-->
+                        <div class="card-body p-4">
+                            <!--begin::Table wrapper-->
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data"
+                                    style="width: 100%;">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                    <tr class="text-start fw-bold fs-7 text-uppercase gs-0">
+                                        <th class="text-black">#</th>
+                                        <th class="text-black">Pilihan</th>
+                                        <th class="text-black">Bobot</th>
+                                    </tr>
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody>
+                                    @foreach ($kriterium->subKriteria as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if($kriterium->tipe_input == 'Input Nilai')
+                                                    @if($item->operator == 1)
+                                                        {{ $item->nilai_a }} sampai {{ $item->nilai_b }}
+                                                    @elseif ($item->operator == 2)
+                                                        &gt; {{ $item->nilai_a }}
+                                                    @elseif ($item->operator == 3)
+                                                        &lt; {{ $item->nilai_a }}
+                                                    @elseif ($item->operator == 4)
+                                                        &gt;= {{ $item->nilai_a }}
+                                                    @elseif ($item->operator == 5)
+                                                        &lt;= {{ $item->nilai_a }}
+                                                    @endif
+                                                @else
+                                                    {{ $item->nilai_a }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $item->bobot }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                            </div>
+                            <!--end::Table-->
+                        </div>
+                        <!--end::Table wrapper-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,7 +161,7 @@
     <script>
         let btnDelete = document.querySelector('.btn-delete');
 
-        btnDelete.addEventListener('click', function(e) {
+        btnDelete.addEventListener('click', function (e) {
             e.preventDefault();
 
             Swal.fire({

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Kriteria extends Model
+class Sub_kriteria extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Kriteria extends Model
      *
      * @var string
      */
-    public $table = 'kriteria';
+    public $table = 'sub_kriteria';
 
     /**
      * The attributes that are mass assignable.
@@ -23,10 +23,11 @@ class Kriteria extends Model
      * @var array
      */
     protected $fillable = [
-        'nama',
+       'id_kriteria',
         'bobot',
-        'jenis',
-        'tipe_input',
+        'operator',
+        'nilai_a',
+        'nilai_b',
     ];
 
     /**
@@ -35,16 +36,4 @@ class Kriteria extends Model
      * @var bool
      */
     public $timestamps = false;
-
-    /**
-     * Get the sub-criteria associated with the criteria.
-     *
-     * This method defines a one-to-many relationship between the Kriteria model and the SubKriteria model.
-     *
-     * @return HasMany The relationship instance.
-     */
-    public function subKriteria(): HasMany
-    {
-        return $this->hasMany(Sub_kriteria::class, 'id_kriteria');
-    }
 }
