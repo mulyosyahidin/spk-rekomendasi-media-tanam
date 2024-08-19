@@ -20,6 +20,12 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
         Route::post('/{kriterium}', 'store')->name('store');
         Route::delete('/{kriterium}', 'destroy')->name('destroy');
     });
+
+    Route::controller(\App\Http\Controllers\Admin\KarakteristikTanaman::class)->prefix('karakteristik-tanaman')->as('karakteristik-tanaman.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{tanaman}', 'edit')->name('edit');
+        Route::patch('/{tanaman}', 'update')->name('update');
+    });
 });
 
 Route::group(['middleware' => ['auth', 'role:user'], 'prefix' => 'user', 'as' => 'user.'], function () {

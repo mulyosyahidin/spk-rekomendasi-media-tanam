@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ activeClass(['admin.tanaman.*']) }}" href="{{ route('admin.tanaman.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ activeClass('admin.tanaman.*') }}" href="{{ route('admin.tanaman.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
                         <span class="hide-menu">Tanaman</span>
                     </a>
@@ -53,6 +53,20 @@
                     <a class="sidebar-link {{ activeClass('admin.sistem-tanam.*') }}" href="{{ route('admin.sistem-tanam.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
                         <span class="hide-menu">Sistem Tanam</span>
+                    </a>
+                </li>
+
+                <li>
+                    <span class="sidebar-divider lg"></span>
+                </li>
+                <li class="nav-small-cap">
+                    <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <span class="hide-menu">DATA</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ activeClass('admin.karakteristik-tanaman.*') }}" href="{{ route('admin.karakteristik-tanaman.index') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                        <span class="hide-menu">Karakteristik Tanaman</span>
                     </a>
                 </li>
             </ul>
