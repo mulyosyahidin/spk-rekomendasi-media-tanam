@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\UserRole;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UserRole;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'profile_picture',
     ];
 
     /**
@@ -44,4 +48,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the URL of the user's profile picture.
+     *
+     * This accessor method generates the full URL for the user's profile picture.
+     * If the user has uploaded a profile picture, it returns the URL to that image.
+     * If not, it returns the URL to a default profile picture.
+     *
+     * @return Attribute The accessor attribute for the profile picture URL.
+     */
+    public function profilePictureUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => asset($this->profile_picture ?: 'assets/images/default-profile-picture.jpg')
+        );
+    }
+
 }
