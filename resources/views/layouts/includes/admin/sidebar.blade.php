@@ -24,6 +24,19 @@
                     </a>
                 </li>
 
+                <li>
+                    <span class="sidebar-divider lg"></span>
+                </li>
+                <li class="nav-small-cap">
+                    <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <span class="hide-menu">DATA</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ activeClass('admin.kriteria.*') }}" href="{{ route('admin.kriteria.index') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                        <span class="hide-menu">Kriteria</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
