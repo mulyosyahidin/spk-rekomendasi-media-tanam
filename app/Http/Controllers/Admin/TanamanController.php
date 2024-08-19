@@ -33,9 +33,7 @@ class TanamanController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $request->validated();
-
-        Tanaman::create($request->all());
+        Tanaman::create($request->validated());
 
         return redirect()->route('admin.tanaman.index')->with('success', 'Berhasil menambah data tanaman');
     }
@@ -61,9 +59,7 @@ class TanamanController extends Controller
      */
     public function update(UpdateRequest $request, Tanaman $tanaman)
     {
-        $request->validated();
-
-        $tanaman->update($request->all());
+        $tanaman->update($request->validated());
 
         return redirect()->route('admin.tanaman.index')->with('success', 'Berhasil memperbarui data tanaman');
     }

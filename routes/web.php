@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     Route::resource('kriteria', \App\Http\Controllers\Admin\KriteriaController::class);
     Route::resource('tanaman', \App\Http\Controllers\Admin\TanamanController::class);
+    Route::resource('media-tanam', \App\Http\Controllers\Admin\MediaTanamController::class)->except('show');
 
     Route::controller(\App\Http\Controllers\Admin\SubKriteriaController::class)->prefix('sub-kriteria')->as('sub-kriteria.')->group(function () {
         Route::get('/{kriterium}', 'show')->name('show');

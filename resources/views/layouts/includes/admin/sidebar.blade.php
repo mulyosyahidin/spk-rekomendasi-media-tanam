@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-small-cap">
                     <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-                    <span class="hide-menu">DATA</span>
+                    <span class="hide-menu">DATA MASTER</span>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ activeClass(['admin.kriteria.*', 'admin.sub-kriteria.*']) }}" href="{{ route('admin.kriteria.index') }}" aria-expanded="false">
@@ -41,6 +41,12 @@
                     <a class="sidebar-link {{ activeClass(['admin.tanaman.*']) }}" href="{{ route('admin.tanaman.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
                         <span class="hide-menu">Tanaman</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ activeClass('admin.media-tanam.*') }}" href="{{ route('admin.media-tanam.index') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                        <span class="hide-menu">Media Tanam</span>
                     </a>
                 </li>
             </ul>

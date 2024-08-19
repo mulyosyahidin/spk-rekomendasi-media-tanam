@@ -36,8 +36,6 @@ class SubKriteriaController extends Controller
      */
     public function store(StoreRequest $request, Kriteria $kriterium)
     {
-        $request->validated();
-
         if ($kriterium->tipe_input == \App\Enums\TipeInputKriteria::NILAI->value) {
             $kriterium->subKriteria()->create([
                 'nilai_a' => $request->nilai_a,

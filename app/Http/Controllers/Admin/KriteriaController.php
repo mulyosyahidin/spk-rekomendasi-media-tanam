@@ -36,9 +36,7 @@ class KriteriaController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $request->validated();
-
-        $kriterium = Kriteria::create($request->only('nama', 'bobot', 'jenis', 'tipe_input'));
+        $kriterium = Kriteria::create($request->validated());
 
         return redirect()->route('admin.kriteria.show', $kriterium)->with('success', 'Berhasil menambah data kriteria');
     }
@@ -66,9 +64,7 @@ class KriteriaController extends Controller
      */
     public function update(UpdateRequest $request, Kriteria $kriterium)
     {
-        $request->validated();
-
-        $kriterium->update($request->only('nama', 'bobot', 'jenis', 'tipe_input'));
+        $kriterium->update($request->validated());
 
         return redirect()->route('admin.kriteria.show', $kriterium)->with('success', 'Berhasil memperbarui data kriteria');
     }
