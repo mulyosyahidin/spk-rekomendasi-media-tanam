@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('kriteria', \App\Http\Controllers\Admin\KriteriaController::class);
+    Route::resource('tanaman', \App\Http\Controllers\Admin\TanamanController::class);
 
     Route::controller(\App\Http\Controllers\Admin\SubKriteriaController::class)->prefix('sub-kriteria')->as('sub-kriteria.')->group(function () {
         Route::get('/{kriterium}', 'show')->name('show');

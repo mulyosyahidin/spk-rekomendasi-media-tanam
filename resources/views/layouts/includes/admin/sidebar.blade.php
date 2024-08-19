@@ -37,6 +37,12 @@
                         <span class="hide-menu">Kriteria</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ activeClass(['admin.tanaman.*']) }}" href="{{ route('admin.tanaman.index') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                        <span class="hide-menu">Tanaman</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
