@@ -49,6 +49,12 @@
                         <span class="hide-menu">Media Tanam</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ activeClass('admin.sistem-tanam.*') }}" href="{{ route('admin.sistem-tanam.index') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                        <span class="hide-menu">Sistem Tanam</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
