@@ -26,9 +26,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        $tipeInput = TipeInputKriteria::array();
-
-        return view('admin.kriteria.create', compact('tipeInput'));
+        return view('admin.kriteria.create');
     }
 
     /**
@@ -54,9 +52,7 @@ class KriteriaController extends Controller
      */
     public function edit(Kriteria $kriterium)
     {
-        $tipeInput = TipeInputKriteria::array();
-
-        return view('admin.kriteria.edit', compact('kriterium', 'tipeInput'));
+        return view('admin.kriteria.edit', compact('kriterium'));
     }
 
     /**

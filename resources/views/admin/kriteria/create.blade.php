@@ -38,7 +38,7 @@
                     <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                         <h4 class="card-title mb-0">Tambah Data Kriteria</h4>
 
-                        <a href="{{ route('admin.kriteria.index') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('admin.kriteria.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="ti ti-arrow-back"></i> Kembali
                         </a>
                     </div>
@@ -118,31 +118,6 @@
                                 <!--end::Input group-->
                             </div>
                         </div>
-
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="form-label">
-                                <span>Tipe Input Data</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="tipe_input" id="tipe-input"
-                                    class="form-control @error('tipe_input') is-invalid @enderror">
-                                <option selected disabled>Pilih Tipe</option>
-                                @foreach($tipeInput as $item)
-                                    <option value="{{ $item }}" {{ old('tipe_input') ==  $item ? 'selected' : '' }}>{{ $item }}</option>
-                                @endforeach
-                            </select>
-                            <!--end::Input-->
-
-                            @error('tipe_input')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <!--end::Input group-->
                     </div>
                     <!--end: Card Body-->
                     <!--begin::Footer-->

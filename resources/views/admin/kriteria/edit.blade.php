@@ -39,7 +39,7 @@
                     <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                         <h4 class="card-title mb-0">Edit Data Kriteria</h4>
 
-                        <a href="{{ route('admin.kriteria.show', $kriterium) }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('admin.kriteria.show', $kriterium) }}" class="btn btn-sm btn-outline-primary">
                             <i class="ti ti-arrow-back"></i> Kembali
                         </a>
                     </div>
@@ -119,31 +119,6 @@
                                 <!--end::Input group-->
                             </div>
                         </div>
-
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="form-label">
-                                <span>Tipe Input Data</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="tipe_input" id="tipe-input"
-                                    class="form-control @error('jenis_data') is-invalid @enderror">
-                                <option selected disabled>Pilih Tipe</option>
-                                @foreach($tipeInput as $key => $value)
-                                    <option value="{{ $key }}" {{ old('tipe_input', $kriterium->tipe_input) ==  $key ? 'selected' : '' }}>{{ $value }}</option>
-                                @endforeach
-                            </select>
-                            <!--end::Input-->
-
-                            @error('jenis_data')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <!--end::Input group-->
                     </div>
                     <!--end: Card Body-->
                     <!--begin::Footer-->

@@ -9,6 +9,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $count = [
+            'kriteria' => \App\Models\Kriteria::count(),
+            'alternatif' => \App\Models\Media_tanam::count() * \App\Models\Sistem_tanam::count(),
+            'tanaman' => \App\Models\Tanaman::count(),
+        ];
+
+        return view('admin.dashboard', compact('count'));
     }
 }

@@ -136,7 +136,16 @@
 </script>
 
 <script>
-    $('.dt-data').DataTable();
+    $(document).ready(function () {
+        $('.dt-data').DataTable();
+    });
+</script>
+
+<script>
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
 </script>
 
 </body>

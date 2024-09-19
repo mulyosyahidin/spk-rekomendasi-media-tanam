@@ -33,12 +33,22 @@
             <!--begin::Tables widget 14-->
             <div class="card w-100 position-relative overflow-hidden">
                 <div class="px-4 py-3 border-bottom d-flex justify-content-between">
-                    <h4 class="card-title mb-0">Sub Kriteria</h4>
+                    <h4 class="card-title mb-0">
+                        Kriteria: <u>{{ $kriterium->nama }}</u>
+                    </h4>
 
-                    <a href="{{ route('admin.kriteria.show', $kriterium) }}" class="btn btn-primary btn-sm">
-                        <i class="ti ti-arrow-left"></i>
-                        Kembali
-                    </a>
+                    <div>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#add-modal"
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="ti ti-plus"></i>
+                            Tambah
+                        </a>
+
+                        <a href="{{ route('admin.kriteria.show', $kriterium) }}" class="btn btn-outline-primary btn-sm">
+                            <i class="ti ti-arrow-back"></i>
+                            Kembali
+                        </a>
+                    </div>
                 </div>
 
                 <!--begin::Card body-->
@@ -51,9 +61,8 @@
                             <!--begin::Table head-->
                             <thead>
                             <tr class="text-start fw-bold fs-7 text-uppercase gs-0">
-                                <th class="text-black">#</th>
-                                <th class="text-black">Pilihan</th>
-                                <th class="text-black">Bobot</th>
+                                <th class="text-black text-center" style="width: 10%;">#</th>
+                                <th class="text-black">Sub Kriteria</th>
                                 <th class="text-black text-end">Hapus</th>
                             </tr>
                             </thead>
@@ -62,25 +71,8 @@
                             <tbody>
                             @foreach ($kriterium->subKriteria as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        @if($kriterium->tipe_input == 'Input Nilai')
-                                            @if($item->operator == 1)
-                                                {{ $item->nilai_a }} sampai {{ $item->nilai_b }}
-                                            @elseif ($item->operator == 2)
-                                                &gt; {{ $item->nilai_a }}
-                                            @elseif ($item->operator == 3)
-                                                &lt; {{ $item->nilai_a }}
-                                            @elseif ($item->operator == 4)
-                                                &gt;= {{ $item->nilai_a }}
-                                            @elseif ($item->operator == 5)
-                                                &lt;= {{ $item->nilai_a }}
-                                            @endif
-                                        @else
-                                            {{ $item->nilai_a }}
-                                        @endif
-                                    </td>
-                                    <td>{{ $item->bobot }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->sub_kriteria }}</td>
                                     <td class="text-end">
                                         <a href="#" data-id="{{ $item->id }}"
                                            class="btn btn-outline-danger btn-sm btn-delete-sub-kriteria">
@@ -98,33 +90,6 @@
                 <!--end::Table wrapper-->
             </div>
             <!--end::Tables widget 14-->
-
-            <form action="{{ route('admin.sub-kriteria.store', $kriterium) }}" method="POST">
-                @csrf
-
-                <!--begin::Tables widget 14-->
-                <div class="card w-100 position-relative overflow-hidden">
-                    <div class="px-4 py-3 border-bottom">
-                        <h4 class="card-title mb-0">Nilai Sub Kriteria</h4>
-                    </div>
-                    <!--begin::Body-->
-                    <div class="card-body pt-6 border-top">
-                        @if($kriterium->tipe_input == 'Input Nilai')
-                            @include('admin.sub-kriteria.input.rentang-nilai')
-                        @else
-                            @include('admin.sub-kriteria.input.pilihan')
-                        @endif
-                    </div>
-                    <!--end: Card Body-->
-                    <!--begin::Footer-->
-                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="submit" class="btn btn-primary" id="kt_forms_widget_14_submit_button">Simpan
-                        </button>
-                    </div>
-                    <!--end::Footer-->
-                </div>
-                <!--end::Tables widget 14-->
-            </form>
         </div>
     </div>
 @endsection
@@ -136,20 +101,42 @@
 
         <input type="hidden" name="id_sub_kriteria">
     </form>
+
+    <div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addModalLabel">Tambah Sub Kriteria</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin.sub-kriteria.store', $kriterium) }}" method="post">
+                    @csrf
+
+                    <div class="modal-body">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="form-label">
+                                <span>Sub Kriteria</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" name="sub_kriteria" class="form-control" required>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('custom_js')
-    <script>
-        let operator = document.querySelector('#operator');
-        operator.addEventListener('change', function (e) {
-            e.preventDefault();
-
-            let value = operator.value;
-
-            window.location = `{{ route('admin.sub-kriteria.show', $kriterium) }}?operator=${value}`;
-        });
-    </script>
-
     <script>
         let deleteSubKriteriaBtns = document.querySelectorAll('.btn-delete-sub-kriteria');
         let deleteSubKriteriaForm = document.querySelector('#delete-sub-kriteria-form');

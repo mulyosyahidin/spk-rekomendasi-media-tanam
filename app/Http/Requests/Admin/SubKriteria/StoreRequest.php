@@ -22,11 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'operator' => ['nullable', 'in:1,2,3,4,5'],
-            'bobot' => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'nilai_a' => ['nullable'],
-            'nilai_b' => ['nullable'],
-            'nilai' => ['nullable']
+            'sub_kriteria' => ['required', 'string'],
         ];
     }
 }

@@ -35,7 +35,7 @@
                         <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                             <h4 class="card-title mb-0">Data Kriteria</h4>
 
-                            <a href="{{ route('admin.kriteria.index') }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('admin.kriteria.index') }}" class="btn btn-sm btn-outline-primary">
                                 <i class="ti ti-arrow-back"></i> Kembali
                             </a>
                         </div>
@@ -105,9 +105,8 @@
                                     <!--begin::Table head-->
                                     <thead>
                                     <tr class="text-start fw-bold fs-7 text-uppercase gs-0">
-                                        <th class="text-black">#</th>
-                                        <th class="text-black">Pilihan</th>
-                                        <th class="text-black">Bobot</th>
+                                        <th class="text-black text-center" style="width: 10%;">#</th>
+                                        <th class="text-black">Sub Kriteria</th>
                                     </tr>
                                     </thead>
                                     <!--end::Table head-->
@@ -115,25 +114,8 @@
                                     <tbody>
                                     @foreach ($kriterium->subKriteria as $item)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                @if($kriterium->tipe_input == 'Input Nilai')
-                                                    @if($item->operator == 1)
-                                                        {{ $item->nilai_a }} sampai {{ $item->nilai_b }}
-                                                    @elseif ($item->operator == 2)
-                                                        &gt; {{ $item->nilai_a }}
-                                                    @elseif ($item->operator == 3)
-                                                        &lt; {{ $item->nilai_a }}
-                                                    @elseif ($item->operator == 4)
-                                                        &gt;= {{ $item->nilai_a }}
-                                                    @elseif ($item->operator == 5)
-                                                        &lt;= {{ $item->nilai_a }}
-                                                    @endif
-                                                @else
-                                                    {{ $item->nilai_a }}
-                                                @endif
-                                            </td>
-                                            <td>{{ $item->bobot }}</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $item->sub_kriteria }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

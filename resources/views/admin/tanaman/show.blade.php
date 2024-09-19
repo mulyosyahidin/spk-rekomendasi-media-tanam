@@ -35,7 +35,7 @@
                         <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                             <h4 class="card-title mb-0">Data Tanaman</h4>
 
-                            <a href="{{ route('admin.tanaman.index') }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('admin.tanaman.index') }}" class="btn btn-sm btn-outline-primary">
                                 <i class="ti ti-arrow-back"></i> Kembali
                             </a>
                         </div>

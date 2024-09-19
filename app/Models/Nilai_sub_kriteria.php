@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Sub_kriteria extends Model
+class Nilai_sub_kriteria extends Model
 {
     use HasFactory;
 
@@ -15,7 +14,7 @@ class Sub_kriteria extends Model
      *
      * @var string
      */
-    public $table = 'sub_kriteria';
+    public $table = 'nilai_sub_kriteria';
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +22,11 @@ class Sub_kriteria extends Model
      * @var array
      */
     protected $fillable = [
+        'id_sistem_tanam',
+        'id_media_tanam',
         'id_kriteria',
-        'sub_kriteria',
+        'id_sub_kriteria',
+        'bobot',
     ];
 
     /**
@@ -33,4 +35,9 @@ class Sub_kriteria extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public function subKriteria()
+    {
+        return $this->belongsTo(Sub_kriteria::class, 'id_sub_kriteria');
+    }
 }

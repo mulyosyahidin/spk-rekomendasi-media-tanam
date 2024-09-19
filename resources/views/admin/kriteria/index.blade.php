@@ -43,12 +43,16 @@
                     <div class="table-responsive">
                         <!--begin::Table-->
                         <table
-                            class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data" style="width: 100%;">
+                                class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data"
+                                style="width: 100%;">
                             <!--begin::Table head-->
                             <thead class="text-dark fs-4">
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th>
                                     <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Kode</h6>
                                 </th>
                                 <th>
                                     <h6 class="fs-4 fw-semibold mb-0">Nama</h6>
@@ -68,6 +72,7 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>C{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->bobot }}</td>
                                     <td>
@@ -119,7 +124,7 @@
         deleteBtns.forEach((btn) => {
             let id = btn.getAttribute('data-id');
 
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 Swal.fire({
                     title: 'Hapus Data?',
                     text: "Yakin ingin menghapus data kriteria? Tindakan ini tidak dapat dibatalkan.",

@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
             'nama' => ['required', 'string', 'max:255'],
             'bobot' => ['required', 'numeric', 'min:0', 'max:100'],
             'jenis' => ['required', 'string', 'in:cost,benefit'],
-            'tipe_input' => ['required', 'string', 'in:' . implode(',', \App\Enums\TipeInputKriteria::names())],
         ];
     }
 }
