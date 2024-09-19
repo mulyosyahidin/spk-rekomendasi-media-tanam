@@ -50,7 +50,7 @@
                                 <th class="v-middle" rowspan="2">
                                     <h6 class="fs-4 fw-semibold mb-0">Nama</h6>
                                 </th>
-                                <th class="v-middle" colspan="{{ $dataKriteria->count() }}">
+                                <th class="v-middle text-center" colspan="{{ $dataKriteria->count() }}">
                                     <h6 class="fs-4 fw-semibold mb-0">Kriteria</h6>
                                 </th>
                                 <th rowspan="2"></th>

@@ -36,18 +36,17 @@ class Kriteria extends Model
     public $timestamps = false;
 
     /**
-     * Get the sub-criteria associated with the criteria.
-     *
-     * This method defines a one-to-many relationship between the Kriteria model and the SubKriteria model.
-     *
-     * @return HasMany The relationship instance.
+     * @return HasMany
      */
     public function subKriteria(): HasMany
     {
         return $this->hasMany(Sub_kriteria::class, 'id_kriteria');
     }
 
-    public function nilaiSubKriteria()
+    /**
+     * @return HasMany
+     */
+    public function nilaiSubKriteria(): HasMany
     {
         return $this->hasMany(Nilai_sub_kriteria::class, 'id_kriteria');
     }

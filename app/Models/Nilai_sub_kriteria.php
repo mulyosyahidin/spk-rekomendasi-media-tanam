@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Nilai_sub_kriteria extends Model
 {
@@ -36,7 +37,10 @@ class Nilai_sub_kriteria extends Model
      */
     public $timestamps = false;
 
-    public function subKriteria()
+    /**
+     * @return BelongsTo
+     */
+    public function subKriteria(): BelongsTo
     {
         return $this->belongsTo(Sub_kriteria::class, 'id_sub_kriteria');
     }

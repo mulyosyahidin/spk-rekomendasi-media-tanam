@@ -39,7 +39,8 @@
                     <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                         <h4 class="card-title mb-0">Tanaman: <u>{{ $tanaman->nama }}</u></h4>
 
-                        <a href="{{ route('admin.karakteristik-tanaman.index') }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.karakteristik-tanaman.index') }}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="ti ti-arrow-back"></i> Kembali
                         </a>
                     </div>
@@ -54,19 +55,13 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                @if ($kriteria->tipe_input == 'Input Nilai')
-                                    <input type="text" name="nilai[{{ $kriteria->id }}]" value="{{ $tanaman->nilai($kriteria->id) }}"
-                                           class="form-control @error('nama') is-invalid @enderror" required>
-                                @else
-                                    <select name="nilai[{{ $kriteria->id }}]" id="nilai-{{ $loop->iteration }}"
-                                            class="form-control @error('tipe_input') is-invalid @enderror">
-                                        <option selected disabled>Pilih</option>
-                                        @foreach($kriteria->subKriteria as $subKriteria)
-                                            <option value="{{ $subKriteria->nilai_a }}" @if($tanaman->nilai($kriteria->id) == $subKriteria->nilai_a) selected @endif
-                                            >{{ $subKriteria->nilai_a }}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
+                                <select name="nilai[{{ $kriteria->id }}]" id="nilai-{{ $loop->iteration }}"
+                                        class="form-control @error('tipe_input') is-invalid @enderror">
+                                    <option selected disabled>Pilih</option>
+                                    @foreach($kriteria->subKriteria as $subKriteria)
+                                        <option value="{{ $subKriteria->id }}" {{ $tanaman->karakteristik()->where('id_kriteria', $kriteria->id)->first()?->pivot->id_sub_kriteria == $subKriteria->id ? 'selected' : '' }}>{{ $subKriteria->sub_kriteria }}</option>
+                                    @endforeach
+                                </select>
                                 <!--end::Input-->
 
                                 @error('nama')

@@ -35,9 +35,9 @@ class KarakteristikTanaman extends Controller
      */
     public function update(Request $request, Tanaman $tanaman)
     {
-        foreach ($request->nilai ?? [] as $idKriteria => $nilai) {
+        foreach ($request->nilai ?? [] as $idKriteria => $idSubKriteria) {
             $tanaman->karakteristik()->syncWithoutDetaching([
-                $idKriteria => ['nilai' => $nilai]
+                $idKriteria => ['id_sub_kriteria' => $idSubKriteria]
             ]);
         }
 
