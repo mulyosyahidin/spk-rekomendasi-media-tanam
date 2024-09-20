@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Perhitungan SPK MOORA')
+@section('title', 'Hasil Perhitungan SPK MOORA')
 
 @section('content')
     <div class="row">
@@ -63,39 +63,63 @@
             </div>
 
             <div class="card w-100 position-relative overflow-hidden">
-                <div class="px-4 py-3 border-bottom text-center">
-                    <h4 class="card-title mb-0">Perhitungan Metode MOORA</h4>
+                <div class="px-4 py-3 border-bottom d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Hasil Pemeringkatan</h4>
+
+                    <a href="{{ route('admin.perhitungan.matrix-keputusan', $tanaman) }}"
+                       class="btn btn-sm btn-outline-primary">
+                        Lihat Perhitungan <i class="ti ti-arrow-right"></i>
+                    </a>
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-4">
-                    @if($tanaman->karakteristik->count() == $kriteria->count())
-                        <p class="text-center">
-                            Perhitungan dilakukan dengan metode MOORA (Multi-Objective Optimization by Ratio Analysis) yang
-                            merupakan metode yang digunakan untuk menyelesaikan masalah multi-kriteria.
-                            <br>
-                            Tahapan perhitungan dimulai dari pembuatan matrix keputusan, normalisasi matrix keputusan,
-                            matrix optimalisasi dan pemeringkatan. Dalam pemeringkatan, jika terdapat nilai akhir yang sama,
-                            maka akan digunakan metode Dense Ranking (Modified Competition Ranking), yaitu metode untuk
-                            memberi peringkat
-                            yang sama kepada elemen yang memiliki nilai yang sama tanpa melewatkan peringkat berikutnya.
-                        </p>
-
-                        <div class="text-center mt-5">
-                            <a href="{{ route('admin.perhitungan.matrix-keputusan', $tanaman) }}" class="btn btn-primary">
-                                Lakukan Perhitungan
-                            </a>
-                        </div>
-                    @else
-                        <p class="text-center">
-                            Sebelum melakukan perhitungan, silahkan lakukan input data karakteristik tanaman terlebih dahulu.
-                        </p>
-
-                        <div class="text-center mt-5">
-                            <a href="{{ route('admin.karakteristik-tanaman.edit', $tanaman) }}" class="btn btn-primary">
-                                Input Data Karakteristik
-                            </a>
-                        </div>
-                    @endif
+                    <!--begin::Table container-->
+                    <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table
+                            class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data"
+                            style="width: 100%;">
+                            <!--begin::Table head-->
+                            <thead class="text-dark fs-4">
+                            <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                                </th>
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Kode Alternatif</h6>
+                                </th>
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Media Tanam</h6>
+                                </th>
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Sistem Tanam</h6>
+                                </th>
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Total Nilai</h6>
+                                </th>
+                                <th class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Peringkat</h6>
+                                </th>
+                            </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                            @foreach ($tanaman->hasilPerhitungan as $hasilPerhitungan)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $hasilPerhitungan->kode_alternatif }}</td>
+                                    <td class="text-center">{{ $hasilPerhitungan->mediaTanam->nama }}</td>
+                                    <td class="text-center">{{ $hasilPerhitungan->sistemTanam->nama }}</td>
+                                    <td class="text-center">{{ $hasilPerhitungan->nilai }}</td>
+                                    <td class="text-center">{{ $hasilPerhitungan->peringkat }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                    </div>
+                    <!--end::Table-->
                 </div>
                 <!--end: Card Body-->
             </div>

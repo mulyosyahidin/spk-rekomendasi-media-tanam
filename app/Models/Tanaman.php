@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -50,5 +51,19 @@ class Tanaman extends Model
         $idSubKriteria = $this->karakteristik->where('id', $idKriteria)->first()?->pivot->id_sub_kriteria;
 
         return $idSubKriteria ? Sub_kriteria::find($idSubKriteria)->sub_kriteria : '';
+    }
+
+    public function hasilPerhitungan()
+    {
+        return $this->hasMany(Hasil_perhitungan::class, 'id_tanaman');
+    }
+
+    public function statusPerhitungan(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->hasilPerhitungan->count() > 0;
+            }
+        );
     }
 }

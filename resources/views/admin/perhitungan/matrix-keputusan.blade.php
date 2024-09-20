@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Perhitungan SPK MOORA')
+@section('title', 'Matrix Keputusan')
 
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <div class="d-sm-flex align-items-center justify-space-between">
-                            <h4 class="mb-4 mb-md-0 card-title">Perhitungan SPK MOORA</h4>
+                            <h4 class="mb-4 mb-md-0 card-title">{{ $tanaman->nama }}</h4>
                             <nav aria-label="breadcrumb" class="ms-auto">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item d-flex align-items-center">
@@ -31,7 +31,17 @@
 
             <div class="card w-100 position-relative overflow-hidden">
                 <div class="px-4 py-3 border-bottom d-flex justify-content-between">
-                    <h4 class="card-title mb-0">Data Tanaman</h4>
+                    <h4 class="card-title mb-0">Matrix Keputusan</h4>
+
+                    <div>
+                        <a href="{{ route('admin.perhitungan.show', $tanaman) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="ti ti-arrow-left"></i> Kembali
+                        </a>
+
+                        <a href="{{ route('admin.perhitungan.matrix-normalisasi', $tanaman) }}" class="btn btn-sm btn-outline-primary">
+                            Matrix Normalisasi <i class="ti ti-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-4">
@@ -39,53 +49,49 @@
                     <div class="table-responsive">
                         <!--begin::Table-->
                         <table
-                            class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data" style="width: 100%;">
+                            class="table table-row-dashed align-middle gs-0 gy-3 my-0 table-hover table-bordered dt-data"
+                            style="width: 100%;">
                             <!--begin::Table head-->
                             <thead class="text-dark fs-4">
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="text-center" style="width: 10%;">
+                                <th rowspan="2" class="v-middle text-center">
                                     <h6 class="fs-4 fw-semibold mb-0">#</h6>
                                 </th>
-                                <th>
-                                    <h6 class="fs-4 fw-semibold mb-0">Nama</h6>
+                                <th rowspan="2" class="v-middle text-center">
+                                    <h6 class="fs-4 fw-semibold mb-0">Alternatif</h6>
                                 </th>
-                                <th>
-                                    <h6 class="fs-4 fw-semibold mb-0">Status</h6>
+                                <th class="v-middle text-center" colspan="{{ $kriteria->count() }}">
+                                    <h6 class="fs-4 fw-semibold mb-0">Kriteria</h6>
                                 </th>
-                                <th></th>
+                            </tr>
+                            <tr>
+                                @foreach($kriteria as $item)
+                                    <th class="text-center bg-dark-light text-white">
+                                        <span class="cursor-pointer" data-bs-toggle="tooltip"
+                                              data-bs-title="{{ $item->nama }}">
+                                            C{{ $loop->iteration }}
+                                        </span>
+                                    </th>
+                                @endforeach
                             </tr>
                             </thead>
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody>
-                            @foreach ($tanaman as $item)
+                            @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>
-                                        @if($item->status_perhitungan)
-                                            <span class="mb-1 badge rounded-pill  bg-success-subtle text-success">
-                                                Sudah Dihitung
-                                            </span>
-                                        @else
-                                            <span class="mb-1 badge rounded-pill  bg-danger-subtle text-danger">
-                                                Belum Dihitung
-                                            </span>
-                                        @endif
+                                    <td class="text-center">
+                                        <span class="cursor-pointer" data-bs-toggle="tooltip"
+                                              data-bs-title="{{ $item['media_tanam']['nama'] }} | {{ $item['sistem_tanam']['nama'] }}">
+                                            {{ $item['kode'] }}
+                                        </span>
                                     </td>
-                                    <td class="text-end">
-                                        @if($item->status_perhitungan)
-                                            <a href="{{ route('admin.perhitungan.hasil', $item) }}"
-                                               class="btn btn-sm btn-outline-primary">
-                                                <i class="ti ti-arrow-right"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('admin.perhitungan.show', $item) }}"
-                                               class="btn btn-sm btn-outline-primary">
-                                                <i class="ti ti-arrow-right"></i>
-                                            </a>
-                                        @endif
-                                    </td>
+                                    @foreach($kriteria as $item2)
+                                        <td class="text-center">
+                                            {{ $item['nilai'][$item2->id] }}
+                                        </td>
+                                    @endforeach
                                 </tr>
                             @endforeach
                             </tbody>
@@ -96,6 +102,7 @@
                 </div>
                 <!--end: Card Body-->
             </div>
+
         </div>
     </div>
 @endsection
