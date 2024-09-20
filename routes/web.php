@@ -3,9 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/media-tanam', [\App\Http\Controllers\HomeController::class, 'mediaTanam'])->name('media-tanam');
+Route::get('/sistem-tanam', [\App\Http\Controllers\HomeController::class, 'sistemTanam'])->name('sistem-tanam');
+Route::get('/rekomendasi-media-tanam', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'index'])->name('rekomendasi-media-tanam.index');
+Route::get('/rekomendasi-media-tanam/{tanaman}', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'show'])->name('rekomendasi-media-tanam.show');
+
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');

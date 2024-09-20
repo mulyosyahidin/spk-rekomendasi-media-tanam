@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tanaman extends Model
 {
@@ -53,11 +54,17 @@ class Tanaman extends Model
         return $idSubKriteria ? Sub_kriteria::find($idSubKriteria)->sub_kriteria : '';
     }
 
-    public function hasilPerhitungan()
+    /**
+     * @return HasMany
+     */
+    public function hasilPerhitungan(): HasMany
     {
         return $this->hasMany(Hasil_perhitungan::class, 'id_tanaman');
     }
 
+    /**
+     * @return Attribute
+     */
     public function statusPerhitungan(): Attribute
     {
         return Attribute::make(
