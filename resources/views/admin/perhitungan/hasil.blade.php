@@ -66,10 +66,16 @@
                 <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                     <h4 class="card-title mb-0">Hasil Pemeringkatan</h4>
 
-                    <a href="{{ route('admin.perhitungan.matrix-keputusan', $tanaman) }}"
-                       class="btn btn-sm btn-outline-primary">
-                        Lihat Perhitungan <i class="ti ti-arrow-right"></i>
-                    </a>
+                    <div>
+                        <a href="#"
+                           class="btn btn-sm btn-outline-primary btn-reset">
+                            Ulangi Perhitungan <i class="ti ti-refresh"></i>
+                        </a>
+                        <a href="{{ route('admin.perhitungan.matrix-keputusan', $tanaman) }}"
+                           class="btn btn-sm btn-outline-primary">
+                            Lihat Perhitungan <i class="ti ti-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-4">
@@ -126,3 +132,35 @@
         </div>
     </div>
 @endsection
+
+@section('custom_html')
+    <form action="{{ route('admin.perhitungan.reset', $tanaman) }}" method="post" id="reset-form">
+        @csrf
+    </form>
+@endsection
+
+@push('custom_js')
+    <script>
+        let resetBtn = document.querySelector('.btn-reset');
+        resetBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            let resetForm = document.querySelector('#reset-form');
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan mengulangi perhitungan SPK MOORA!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Ulangi!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resetForm.submit();
+                }
+            });
+        });
+    </script>
+@endpush

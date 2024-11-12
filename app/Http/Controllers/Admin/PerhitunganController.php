@@ -145,4 +145,23 @@ class PerhitunganController extends Controller
 
         return view('admin.perhitungan.hasil', compact('tanaman'));
     }
+
+    public function reset(Tanaman $tanaman)
+    {
+        $tanaman->hasilPerhitungan()->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Berhasil mereset hasil perhitungan');
+    }
+
+    public function resetAll()
+    {
+        Hasil_perhitungan::truncate();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Berhasil mereset semua hasil perhitungan');
+    }
+
 }

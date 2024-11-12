@@ -32,6 +32,11 @@
             <div class="card w-100 position-relative overflow-hidden">
                 <div class="px-4 py-3 border-bottom d-flex justify-content-between">
                     <h4 class="card-title mb-0">Data Tanaman</h4>
+
+                    <a href="#"
+                       class="btn btn-sm btn-outline-primary btn-reset">
+                        Ulangi Semua Perhitungan <i class="ti ti-refresh"></i>
+                    </a>
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-4">
@@ -99,3 +104,35 @@
         </div>
     </div>
 @endsection
+
+@section('custom_html')
+    <form action="{{ route('admin.perhitungan.reset-all') }}" method="post" id="reset-form">
+        @csrf
+    </form>
+@endsection
+
+@push('custom_js')
+    <script>
+        let resetBtn = document.querySelector('.btn-reset');
+        resetBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            let resetForm = document.querySelector('#reset-form');
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Yakin ingin mengulangi semua perhitungan? Setelah diulangi, semua data perhitungan akan dihapus.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Ulangi!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resetForm.submit();
+                }
+            });
+        });
+    </script>
+@endpush

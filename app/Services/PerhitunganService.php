@@ -265,26 +265,13 @@ class PerhitunganService
             return $b['nilai'] <=> $a['nilai'];
         });
 
-        // Hitung peringkat dense
         $rank = 1;
-        $previousValue = null;
-        $previousRank = null;
-
-        foreach ($data as $index => &$item) {
-            // Jika nilai adalah 0, berikan peringkat 0
-            if ($item['nilai'] == 0) {
-                $item['peringkat'] = 0;
+        for ($i = 0; $i < count($data); $i++) {
+            if ($i > 0 && $data[$i]['nilai'] == $data[$i - 1]['nilai']) {
+                $data[$i]['peringkat'] = $data[$i - 1]['peringkat'];
             } else {
-                if ($previousValue === $item['nilai']) {
-                    // Jika nilai sama dengan nilai sebelumnya, gunakan peringkat yang sama
-                    $item['peringkat'] = $previousRank;
-                } else {
-                    // Jika nilai berbeda, tetapkan peringkat saat ini
-                    $item['peringkat'] = $rank;
-                    $previousRank = $rank;
-                }
+                $data[$i]['peringkat'] = $rank;
 
-                $previousValue = $item['nilai'];
                 $rank++;
             }
         }

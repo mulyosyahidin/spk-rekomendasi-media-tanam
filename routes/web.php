@@ -9,7 +9,6 @@ Route::get('/sistem-tanam', [\App\Http\Controllers\HomeController::class, 'siste
 Route::get('/rekomendasi-media-tanam', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'index'])->name('rekomendasi-media-tanam.index');
 Route::get('/rekomendasi-media-tanam/{tanaman}', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'show'])->name('rekomendasi-media-tanam.show');
 
-
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
@@ -32,6 +31,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     Route::controller(\App\Http\Controllers\Admin\PerhitunganController::class)->prefix('perhitungan')->as('perhitungan.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/reset-all', 'resetAll')->name('reset-all');
         Route::get('/{tanaman}', 'show')->name('show');
 
         Route::get('/{tanaman}/matrix-keputusan', 'matrixKeputusan')->name('matrix-keputusan');
@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
         Route::post('/{tanaman}/simpan', 'simpan')->name('simpan');
         Route::get('/{tanaman}/hasil', 'hasil')->name('hasil');
+
+        Route::post('/{tanaman}/reset', 'reset')->name('reset');
     });
 
     Route::controller(\App\Http\Controllers\Admin\AlternatifController::class)->prefix('alternatif')->as('alternatif.')->group(function () {
