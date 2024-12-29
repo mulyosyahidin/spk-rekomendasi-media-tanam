@@ -2,7 +2,7 @@
     <div class="container flex-lg-row flex-nowrap align-items-center">
         <div class="navbar-brand w-100">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/images/logo.jpeg') }}" alt="Logo" style="width: 10%;"/>
+                <img src="{{ asset('assets/images/h1.png') }}" alt="Logo" style="width: 10%;"/>
             </a>
         </div>
         <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">

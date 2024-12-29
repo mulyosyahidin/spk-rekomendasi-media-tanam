@@ -4,7 +4,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('home') }}" class="text-nowrap logo-img">
-                <img src="{{ asset('assets/images/logo.jpeg') }}" class="img-fluid" alt="" style="width: 10%;" />
+                <img src="{{ asset('assets/images/h1.png') }}" class="img-fluid" alt="" style="width: 15%;" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>

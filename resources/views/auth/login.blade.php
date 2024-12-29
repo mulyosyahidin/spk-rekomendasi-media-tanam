@@ -9,14 +9,7 @@
 
     <title>Login</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="{{ asset('assets/images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
-
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="{{ asset('assets/images/h1.png') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/themes/matdash/css/style.login.min.css') }}"/>
 
@@ -33,9 +26,9 @@
                     <div class="min-vh-100 bg-body row justify-content-center align-items-center p-5">
                         <div class="col-12 auth-card">
                             <a href="{{ route('home') }}" class="text-nowrap logo-img d-block w-100">
-                                <img src="{{ asset('assets/images/logo.jpeg') }}"
+                                <img src="{{ asset('assets/images/h1.png') }}"
                                      class="dark-logo img-fluid"
-                                     style="width: 10%" alt="Logo-Dark"/>
+                                     style="width: 15%" alt="Logo-Dark"/>
                             </a>
                             <h2 class="mb-2 mt-4 fs-7 fw-bolder">Login</h2>
                             @if(session()->has('status'))
