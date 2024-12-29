@@ -63,6 +63,26 @@
                             @enderror
                         </div>
                         <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="form-label">
+                                <span>Deskripsi</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <textarea name="deskripsi"
+                                      class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
+                            <!--end::Input-->
+
+                            @error('deskripsi')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
                     </div>
                     <!--end: Card Body-->
                     <!--begin::Footer-->

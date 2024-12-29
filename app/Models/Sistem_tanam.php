@@ -23,6 +23,7 @@ class Sistem_tanam extends Model
      */
     protected $fillable = [
         'nama',
+        'deskripsi',
     ];
 
     /**

@@ -125,7 +125,7 @@
                         <h3 class="mb-4">Rekomendasi Alternatif Media Tanam dan Sistem Tanam</h3>
 
                         @foreach($tanaman->hasilPerhitungan as $item)
-                            <a href="#" class="card mb-1 lift">
+                            <div class="card mb-1 lift">
                                 <div class="card-body p-5">
                                     <span class="row justify-content-between align-items-center">
                                         <span class="col-md-9 mb-2 mb-md-0 d-flex align-items-center text-body">
@@ -139,7 +139,7 @@
                                     </span>
                                 </div>
                                 <!-- /.card-body -->
-                            </a>
+                            </div>
                             <!-- /.card -->
                         @endforeach
                     </div>

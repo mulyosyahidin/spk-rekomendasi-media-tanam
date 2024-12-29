@@ -23,6 +23,7 @@ class Media_tanam extends Model
      */
     protected $fillable = [
         'nama',
+        'deskripsi',
     ];
 
     /**

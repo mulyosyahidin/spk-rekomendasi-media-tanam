@@ -22,6 +22,34 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <style>
+        .accordion .card {
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .accordion .card-header button {
+            background-color: #fff;
+            border: none;
+            box-shadow: none;
+        }
+
+        .accordion .card-header button:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .accordion .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion .accordion-collapse.show .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+    </style>
+
     @vite(['resources/js/app.js'])
 </head>
 
@@ -63,22 +91,38 @@
                     <div class="job-list mb-10">
                         <h3 class="mb-4">Media Tanam</h3>
 
-                        @foreach($data as $item)
-                            <a href="#" class="card mb-1 lift">
-                                <div class="card-body p-5">
-                                    <span class="row justify-content-between align-items-center">
-                                        <span class="col-md-12 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                            <span
-                                                class="avatar bg-red text-white w-9 h-9 fs-17 me-3">{{ createAcronym($item->nama, max: 2) }}</span>
-                                            {{ $item->nama }}
-                                        </span>
-                                    </span>
+                        <div class="accordion" id="mediaTanamAccordion">
+                            @foreach($data as $index => $item)
+                                <div class="card mb-1 lift">
+                                    <div class="card-header p-0" id="heading{{ $index }}">
+                                        <button class="btn w-100 text-start p-5 d-flex align-items-center justify-content-between"
+                                                type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ $index }}"
+                                                aria-expanded="false" aria-controls="collapse{{ $index }}">
+                        <span class="d-flex align-items-center text-body">
+                            <span class="avatar bg-red text-white w-9 h-9 fs-17 me-3">
+                                {{ createAcronym($item->nama, max: 2) }}
+                            </span>
+                            {{ $item->nama }}
+                        </span>
+                                            <span class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                                        </button>
+                                    </div>
+                                    <div id="collapse{{ $index }}"
+                                         class="accordion-collapse collapse"
+                                         aria-labelledby="heading{{ $index }}"
+                                         data-bs-parent="#mediaTanamAccordion">
+                                        <div class="card-body p-5">
+                                            {{ $item->deskripsi ?? '-' }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- /.card-body -->
-                            </a>
-                            <!-- /.card -->
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
+
                 </div>
                 <!-- /column -->
             </div>

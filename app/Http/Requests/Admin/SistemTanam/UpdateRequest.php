@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'nama' => ['required', 'string', 'max:255'],
+            'deskripsi' => ['nullable', 'string'],
         ];
     }
 }
