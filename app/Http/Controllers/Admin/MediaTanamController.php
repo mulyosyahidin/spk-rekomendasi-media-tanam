@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MediaTanam\StoreRequest;
 use App\Http\Requests\Admin\MediaTanam\UpdateRequest;
 use App\Models\Media_tanam;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 
 class MediaTanamController extends Controller
@@ -31,9 +32,16 @@ class MediaTanamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, FileService $fileService)
     {
-        Media_tanam::create($request->validated());
+        $mediaTanam = Media_tanam::create($request->validated());
+
+        $foto = $fileService->upload('foto');
+        if ($foto) {
+            $mediaTanam->update([
+                'foto' => $foto['file_path'],
+            ]);
+        }
 
         return redirect()->route('admin.media-tanam.index')->with('success', 'Berhasil menambah data media tanam');
     }
@@ -49,9 +57,20 @@ class MediaTanamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Media_tanam $media_tanam)
+    public function update(UpdateRequest $request, Media_tanam $media_tanam, FileService $fileService)
     {
         $media_tanam->update($request->validated());
+
+        $foto = $fileService->upload('foto');
+        if ($foto) {
+            if ($media_tanam->foto) {
+                $fileService->delete($media_tanam->foto);
+            }
+
+            $media_tanam->update([
+                'foto' => $foto['file_path'],
+            ]);
+        }
 
         return redirect()->route('admin.media-tanam.index')->with('success', 'Berhasil memperbarui data media tanam');
     }

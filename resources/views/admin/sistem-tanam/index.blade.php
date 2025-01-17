@@ -61,7 +61,15 @@
                             <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        @if($item->foto)
+                                            <a href="{{ asset($item->foto) }}" target="_blank">
+                                                <img src="{{ asset($item->foto) }}" class="rounded" style="width: 60px;" />
+                                            </a>
+                                        @else
+                                            {{ $loop->iteration }}
+                                        @endif
+                                    </td>
                                     <td>{{ $item->nama }}</td>
                                     <td class="text-end">
                                         <a href="{{ route('admin.sistem-tanam.edit', $item) }}"

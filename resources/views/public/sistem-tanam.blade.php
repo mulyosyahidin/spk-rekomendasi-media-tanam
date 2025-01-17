@@ -93,15 +93,20 @@
                                             type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapse{{ $index }}"
                                             aria-expanded="false" aria-controls="collapse{{ $index }}">
-                        <span class="d-flex align-items-center text-body">
-                            <span class="avatar bg-red text-white w-9 h-9 fs-17 me-3">
-                                {{ createAcronym($item->nama, max: 2) }}
-                            </span>
-                            {{ $item->nama }}
-                        </span>
+                                            <span class="d-flex align-items-center text-body">
+                                                @if($item->foto)
+                                                    <img src="{{ asset($item->foto) }}"
+                                                         class="avatar w-9 h-9 me-3" alt="{{ $item->nama }}">
+                                                @else
+                                                    <span class="avatar bg-red text-white w-9 h-9 fs-17 me-3">
+                                                    {{ createAcronym($item->nama, max: 2) }}
+                                                </span>
+                                                @endif
+                                                {{ $item->nama }}
+                                            </span>
                                             <span class="accordion-icon">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div id="collapse{{ $index }}"
@@ -109,6 +114,13 @@
                                          aria-labelledby="heading{{ $index }}"
                                          data-bs-parent="#mediaTanamAccordion">
                                         <div class="card-body p-5">
+                                            @if($item->foto)
+                                                <a href="{{ asset($item->foto) }}" target="_blank">
+                                                    <img src="{{ asset($item->foto) }}"
+                                                         class="img-fluid mb-4 rounded" alt="{{ $item->nama }}"/>
+                                                </a>
+                                            @endif
+
                                             {{ $item->deskripsi ?? '-' }}
                                         </div>
                                     </div>

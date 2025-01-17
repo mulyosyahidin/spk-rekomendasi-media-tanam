@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SistemTanam\StoreRequest;
 use App\Http\Requests\Admin\SistemTanam\UpdateRequest;
 use App\Models\Sistem_tanam;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 
 class SistemTanamController extends Controller
@@ -31,9 +32,16 @@ class SistemTanamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, FileService $fileService)
     {
-        Sistem_tanam::create($request->validated());
+        $sistemTanam = Sistem_tanam::create($request->validated());
+
+        $foto = $fileService->upload('foto');
+        if ($foto) {
+            $sistemTanam->update([
+                'foto' => $foto['file_path'],
+            ]);
+        }
 
         return redirect()->route('admin.sistem-tanam.index')->with('success', 'Berhasil menambah data sistem tanam');
     }
@@ -49,9 +57,20 @@ class SistemTanamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Sistem_tanam $sistem_tanam)
+    public function update(UpdateRequest $request, Sistem_tanam $sistem_tanam, FileService $fileService)
     {
         $sistem_tanam->update($request->validated());
+
+        $foto = $fileService->upload('foto');
+        if ($foto) {
+           if ($sistem_tanam->foto) {
+                $fileService->delete($sistem_tanam->foto);
+            }
+
+            $sistem_tanam->update([
+                'foto' => $foto['file_path'],
+            ]);
+        }
 
         return redirect()->route('admin.sistem-tanam.index')->with('success', 'Berhasil memperbarui data sistem tanam');
     }

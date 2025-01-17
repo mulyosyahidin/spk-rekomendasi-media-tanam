@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('admin.sistem-tanam.update', $sistem_tanam) }}" method="POST">
+            <form action="{{ route('admin.sistem-tanam.update', $sistem_tanam) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -58,6 +58,28 @@
                             <!--end::Input-->
 
                             @error('nama')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="form-label">
+                                <span>Foto</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="file" name="foto"
+                                   class="form-control @error('foto') is-invalid @enderror">
+                            <!--end::Input-->
+
+                            <small class="text-muted">Pilih foto baru untuk mengganti yang lama</small>
+
+                            @error('foto')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

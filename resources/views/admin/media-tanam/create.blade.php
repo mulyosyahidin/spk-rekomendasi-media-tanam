@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('admin.media-tanam.store') }}" method="POST">
+            <form action="{{ route('admin.media-tanam.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="card card-body py-3">
@@ -57,6 +57,26 @@
                             <!--end::Input-->
 
                             @error('nama')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="form-label">
+                                <span>Foto</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="file" name="foto"
+                                   class="form-control @error('foto') is-invalid @enderror">
+                            <!--end::Input-->
+
+                            @error('foto')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
