@@ -115,10 +115,12 @@
                                          data-bs-parent="#mediaTanamAccordion">
                                         <div class="card-body p-5">
                                             @if($item->foto)
-                                                <a href="{{ asset($item->foto) }}" target="_blank">
-                                                    <img src="{{ asset($item->foto) }}"
-                                                         class="img-fluid mb-4 rounded" alt="{{ $item->nama }}"/>
-                                                </a>
+                                                <div class="text-center">
+                                                    <a href="{{ asset($item->foto) }}" target="_blank">
+                                                        <img src="{{ asset($item->foto) }}"
+                                                             class="img-fluid mb-4 rounded" alt="{{ $item->nama }}"/>
+                                                    </a>
+                                                </div>
                                             @endif
 
                                             {{ $item->deskripsi ?? '-' }}
