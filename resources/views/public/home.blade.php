@@ -41,11 +41,7 @@
                         REKOMENDASI MEDIA DAN SISTEM TANAM HIDROPONIK MENGGUNAKAN METODE <i>MULTI OBJECTIVE OPTIMIZATION ON THE BASIS OF RATIO ANALSYSIS</i> (MOORA)
                     </p>
                     <span>
-                       @if(auth()->check())
-                            <a class="btn btn-lg btn-primary rounded-pill me-2" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                        @else
-                            <a class="btn btn-lg btn-primary rounded-pill me-2" href="{{ route('login') }}">Login</a>
-                        @endif
+                       <a class="btn btn-sm btn-primary rounded-pill me-2" href="{{ route('spk.index') }}">Hitung Tanaman Anda</a>
                     </span>
                 </div>
                 <!-- /column -->

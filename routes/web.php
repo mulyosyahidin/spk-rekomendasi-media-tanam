@@ -9,6 +9,10 @@ Route::get('/sistem-tanam', [\App\Http\Controllers\HomeController::class, 'siste
 Route::get('/rekomendasi-media-tanam', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'index'])->name('rekomendasi-media-tanam.index');
 Route::get('/rekomendasi-media-tanam/{tanaman}', [\App\Http\Controllers\RekomendasiMediaTanamController::class, 'show'])->name('rekomendasi-media-tanam.show');
 
+Route::get('/spk', [\App\Http\Controllers\SpkController::class, 'index'])->name('spk.index');
+Route::post('/spk/hitung', [\App\Http\Controllers\SpkController::class, 'store'])->name('spk.hitung');
+Route::get('/spk/hasil/{perhitungan_user}', [\App\Http\Controllers\SpkController::class, 'hasil'])->name('spk.hasil');
+
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
