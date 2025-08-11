@@ -25,9 +25,6 @@ php artisan db:seed --force
 echo "Cache configurations..."
 php artisan config:cache
 
-echo "Cache routes..."
-php artisan route:cache
-
 # Create symbolic link for storage only if not exists
 if [ ! -L /var/www/html/public/storage ]; then
   echo "Creating storage symbolic link..."
