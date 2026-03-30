@@ -82,6 +82,14 @@
                 <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
                     <form class="contact-form" method="post" action="{{ route('spk.hitung') }}">
                         @csrf
+                        <div class="form-select-wrapper mb-4">
+                            <select id="id_tanaman" name="id_tanaman" class="form-select">
+                                <option value="" selected>Pilih Tanaman</option>
+                                @foreach($dataTanaman as $tanaman)
+                                    <option value="{{ $tanaman->id }}" data-nama="{{ $tanaman->nama }}">{{ $tanaman->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-floating mb-4">
                             <input id="form_name" type="text" name="nama" class="form-control" placeholder="" required="">
@@ -121,6 +129,21 @@
 
 <script src="{{ asset('assets/themes/sandbox/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/themes/sandbox/js/theme.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const idTanamanSelect = document.getElementById('id_tanaman');
+        const formName = document.getElementById('form_name');
+
+        if (idTanamanSelect && formName) {
+            idTanamanSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                if (selectedOption.value) {
+                    formName.value = selectedOption.getAttribute('data-nama');
+                }
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

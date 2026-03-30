@@ -119,13 +119,50 @@
                                     <!--/column -->
                                 </div>
                                 <!--/.row -->
-
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
                     <!-- /.blog -->
+
+                    @if($perhitungan_user->id_tanaman && $perhitungan_user->tanaman)
+                        <div class="blog single mt-5">
+                            <div class="card shadow-lg bg-soft-green">
+                                <div class="card-body">
+                                    <h3 class="mb-3">Karakteristik Ideal Tanaman {{ $perhitungan_user->tanaman->nama }}</h3>
+                                    <div class="row gy-3 gx-xl-8">
+                                        <div class="col-xl-6">
+                                            <ul class="icon-list bullet-bg bullet-soft-green mb-0">
+                                                @foreach($perhitungan_user->tanaman->karakteristik->take(ceil($perhitungan_user->tanaman->karakteristik->count() / 2)) as $karakteristik)
+                                                    <li>
+                                                        <span><i class="uil uil-check me-1"></i></span>
+                                                        <span>{{ $karakteristik->nama }}</span>:
+                                                        <span class="text-muted">
+                                                            {{ $perhitungan_user->tanaman->nilai($karakteristik->id) }}
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <ul class="icon-list bullet-bg bullet-soft-green mb-0">
+                                                @foreach($perhitungan_user->tanaman->karakteristik->skip(ceil($perhitungan_user->tanaman->karakteristik->count() / 2)) as $karakteristik)
+                                                    <li>
+                                                        <span><i class="uil uil-check me-1"></i></span>
+                                                        <span>{{ $karakteristik->nama }}</span>:
+                                                        <span class="text-muted">
+                                                            {{ $perhitungan_user->tanaman->nilai($karakteristik->id) }}
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-10 mx-auto mt-5">

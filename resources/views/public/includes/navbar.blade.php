@@ -25,17 +25,20 @@
                     <li class="nav-item">
                         <a class="nav-link {{ activeClass('rekomendasi-media-tanam.*') }}" href="{{ route('rekomendasi-media-tanam.index') }}">Rekomendasi Media Tanam</a>
                     </li>
-                    @if(request()->routeIs('home'))
+                    <li class="nav-item">
+                        <a class="nav-link {{ activeClass('spk.*') }}" href="{{ route('spk.index') }}">SPK</a>
+                    </li>
+                    @if(auth()->check())
                         <li class="nav-item">
-                            @if(auth()->check())
-                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            @if(auth()->user()->hasRole('admin'))
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
                             @else
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                <a class="nav-link" href="{{ route('user.dashboard') }}">Dashboard</a>
                             @endif
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link {{ activeClass('spk.*') }}" href="{{ route('spk.index') }}">SPK</a>
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
                         </li>
                     @endif
                 </ul>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Perhitungan_user extends Model
@@ -17,7 +18,25 @@ class Perhitungan_user extends Model
      */
     protected $fillable = [
         'nama_tanaman',
+        'id_tanaman',
+        'user_id',
     ];
+
+    /**
+     * Get the user that owns the perhitungan user.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the tanaman for the perhitungan user.
+     */
+    public function tanaman(): BelongsTo
+    {
+        return $this->belongsTo(Tanaman::class, 'id_tanaman');
+    }
 
     /**
      * Get the karakteristik for the perhitungan user.
